@@ -1,6 +1,0 @@
-1.fetch origin 確認github 伺服器上有沒有新的資料
-2. pull orighin 有更新的話,再把東西拉下來.
-3.有出現衝突的話,要先解衝突(沒有的話,可以略過)
-4.要打標題(主要是要辨識更新的內容是什麼)
-5.commit to main (把自己更新的內容,打包起來準備上傳到gitub上)
-6.push origin (把打包起來的內容更新到gihub上)
