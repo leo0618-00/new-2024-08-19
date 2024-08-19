@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜拳遊戲</title>
+    <style>
+        /* 保持現有的CSS設置 */
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        <div class="game-area">
+            <div class="game-npc-box">
+                <p>電腦:</p>
+                <img src="./img/布.png" class="npc npc-scissors">
+                <img src="./img/剪刀.png" class="npc npc-paper">
+                <img src="./img/石頭.png" class="npc npc-rock">
+            </div>
+            <div class="result"></div>
+            <div class="game-img">
+                <p>玩家:</p>
+                <label for="rock-btn"><input type="radio" id="rock-btn" name="game" class="rock"><img
+                        src="./img/石頭 copy.png" alt=""></label>
+                <label for="scissors-btn"><input type="radio" id="scissors-btn" name="game" class="scissors"><img
+                        src="./img/剪刀 copy.png" alt=""></label>
+                <label for="paper-btn"><input type="radio" id="paper-btn" name="game" class="paper"><img
+                        src="./img/布 copy.png" alt=""></label>
+            </div>
+            <div class="mora-box-2">
+                <button type="button" class="btn1">出拳</button>
+                <button type="button" class="btn2">重置</button>
+            </div>
+            <!-- 結果 -->
+            <div class="result-area"></div>
+        </div>
+    </div>
+    <script>
+        // 功能 石頭
+        let rock = document.querySelector('.rock');
+        // 功能 剪刀
+        let scissors = document.querySelector('.scissors');
+        // 功能 布
+        let paper = document.querySelector('.paper');
+        // 出拳
+        let btn1 = document.querySelector('.btn1');
+        // 重置
+        let btn2 = document.querySelector('.btn2');
+        // 結果區 設定為空字串
+        let resultarea = document.querySelector('.result-area');
+        // 結果 設定為空字串
+        let result = ''
+        // 空字串 做統一使用
+        let userplay = ''
+        //  僅限npc使用功能
+        let npcplay = ['rock', 'paper', 'scissors'];
+        //  將npc 使用功能使用隨機變數的方式執行
+        let npcRandomly = npcplay[Math.floor(Math.random() * npcplay.length)];
+    
+        // 中英文對照字典
+        const translationMap = {
+            'rock': '石頭',
+            'scissors': '剪刀',
+            'paper': '布'
+        };
+    
+        // 宣告 石頭 監聽器 將userplay (空字串設定)
+        rock.addEventListener('click', () => {
+            userplay = 'rock';
+        });
+        // 宣告 剪刀 監聽器 將userplay (空字串設定)
+        scissors.addEventListener('click', () => {
+            userplay = 'scissors';
+        })
+        // 宣告 布 監聽器 將userplay (空字串設定)
+        paper.addEventListener('click', () => {
+            userplay = 'paper';
+        })
+        // 將btn1(出拳) 設定監聽器 當按下時做檢查
+        btn1.addEventListener('click', () => {
+            // 檢查userplay 有沒有值(有無按下剪刀石頭布 其中之一)
+            if (!userplay) {
+                // 若沒有則會彈出 請先選擇字樣
+                alert('請先選擇');
+                return;
+            }
+            // 更新npc 隨機的方式 (重複宣告在執行判斷區使用)
+            let npcRandomly = npcplay[Math.floor(Math.random() * npcplay.length)];
+    
+            if (userplay === npcRandomly) {
+                result = '平手';
+            } else if ((userplay === 'rock' && npcRandomly === 'scissors') ||
+                (userplay === 'scissors' && npcRandomly === 'paper') ||
+                (userplay === 'paper' && npcRandomly === 'rock')) {
+                result = '你贏了';
+            } else {
+                result = '你輸了';
+            }
+            resultarea.textContent = `你出 ${translationMap[userplay]}, 電腦出 ${translationMap[npcRandomly]} 結果: ${result}`;
+        })
+    </script>
+    
+</body>
+
+</html>
